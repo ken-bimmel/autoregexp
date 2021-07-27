@@ -19,7 +19,7 @@ function ReplaceBox(props) {
     if (findRegExp && replaceValue) {
       props.changeCallback({ find: findRegExp, replace: replaceValue })
     }
-  }, [findRegExp, replaceValue])
+  }, [findRegExp, replaceValue, props])
 
   return (
     <Grid item>
