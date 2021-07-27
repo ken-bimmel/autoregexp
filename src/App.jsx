@@ -56,7 +56,9 @@ function App() {
     }
     for (let replacement of replacements) {
       const regExp = new RegExp(replacement.find, 'g');
-      rawText = rawText.replaceAll(regExp, replacement.replace)
+      // May cause side efects??
+      const newLineFixedReplace = replacement.replace.replaceAll("\\n", "\n");
+      rawText = rawText.replaceAll(regExp, newLineFixedReplace);
     }
     setReplacedText(rawText);
     navigator.clipboard.writeText(rawText).then(openClipSuccessSnack, openClipFailureSnack)
