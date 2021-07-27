@@ -78,6 +78,7 @@ function App() {
   function importReplacements() {
     const importedConfig = JSON.parse(importedReplacements);
     setReplacements(importedConfig);
+    setImportedReplacements("Snipped for space");
   }
 
   function exportReplacements() {
