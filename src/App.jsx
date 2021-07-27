@@ -4,7 +4,8 @@ import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import ReplaceBox from './ReplaceBox';
-import { Button, Card, CardActions, CardContent } from '@material-ui/core';
+import { Button, Card, CardActions, CardContent, FormControlLabel, Switch } from '@material-ui/core';
+import TurndownService from 'turndown';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -17,10 +18,18 @@ function App() {
   const [clipSuccess, setClipSuccess] = useState(false);
   const [clipFailure, setClipFailure] = useState(false);
 
+  const [htmlToMarkdown, setHtmlToMarkdown] = useState(false);
+
+  const turndownService = new TurndownService({ headingStyle: "atx", hr: "---", bulletListMarker: "-", codeBlockStyle: "fenced" })
+
 
 
   function handlePaste(event) {
     let rawText = (event.clipboardData || window.clipboardData).getData('text');
+    if (htmlToMarkdown) {
+      rawText = (event.clipboardData || window.clipboardData).getData('text/html');
+      rawText = turndownService.turndown(rawText);
+    }
     for (let replacement of replacements) {
       const regExp = new RegExp(replacement.find, 'g');
       rawText = rawText.replaceAll(regExp, replacement.replace)
@@ -87,6 +96,20 @@ function App() {
             direction="column"
             spacing={4}
           >
+            <Grid item>
+              <Card>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={htmlToMarkdown}
+                      onChange={(event) => setHtmlToMarkdown(event.target.checked)}
+                      color="primary"
+                    />
+                  }
+                  label="Convert HTML To Markdown on Paste (before replacement)"
+                />
+              </Card>
+            </Grid>
             <Grid item>
               <Card>
                 <TextField
