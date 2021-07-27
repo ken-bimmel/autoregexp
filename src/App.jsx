@@ -179,6 +179,7 @@ function App() {
                     variant="outlined"
                     fullWidth
                     placeholder="Put config JSON here."
+                    maxRows={10}
                     value={importedReplacements}
                     onChange={(event) => setImportedReplacements(event.target.value)
                     }
