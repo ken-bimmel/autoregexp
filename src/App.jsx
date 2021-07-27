@@ -1,7 +1,4 @@
 import { React, useState } from 'react';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import ReplaceBox from './ReplaceBox';
 import {
@@ -10,8 +7,15 @@ import {
   CardActions,
   CardContent,
   FormControlLabel,
-  Switch
+  Switch,
+  Snackbar,
+  TextField,
+  Grid
 } from '@material-ui/core';
+import {
+  createTheme,
+  ThemeProvider
+} from '@material-ui/core/styles';
 import TurndownService from 'turndown';
 
 function Alert(props) {
@@ -19,6 +23,14 @@ function Alert(props) {
 }
 
 function App() {
+  const theme = createTheme(
+    {
+      palette: {
+        type: 'dark'
+      }
+    }
+  )
+
   const [importedReplacements, setImportedReplacements] = useState("");
   const [replacedText, setReplacedText] = useState("");
   const [replacements, setReplacements] = useState([{ find: "a", replace: "a" }]);
@@ -95,7 +107,7 @@ function App() {
   }
 
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <Grid
         container
         direction="row"
@@ -195,7 +207,7 @@ function App() {
           Processed and copied to clipboard!
         </Alert>
       </Snackbar>
-    </div>
+    </ThemeProvider>
   );
 }
 
