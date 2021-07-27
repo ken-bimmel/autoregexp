@@ -31,9 +31,9 @@ function App() {
     }
   )
 
-  const [importedReplacements, setImportedReplacements] = useState("");
+  const [importedReplacements, setImportedReplacements] = useState();
   const [replacedText, setReplacedText] = useState("");
-  const [replacements, setReplacements] = useState([{ find: "a", replace: "a" }]);
+  const [replacements, setReplacements] = useState();
   const [clipSuccess, setClipSuccess] = useState(false);
   const [clipFailure, setClipFailure] = useState(false);
 
@@ -47,8 +47,6 @@ function App() {
       codeBlockStyle: "fenced"
     }
   )
-
-
 
   function handlePaste(event) {
     let rawText = (event.clipboardData || window.clipboardData).getData('text');
@@ -177,7 +175,9 @@ function App() {
                     fullWidth
                     placeholder="Put config JSON here."
                     value={importedReplacements}
-                    onChange={(event) => setImportedReplacements(event.target.value)}
+                    onChange={(event) => {
+                      console.log("imported replacements: ", event.target.value); setImportedReplacements(event.target.value)
+                    }}
                   />
                 </CardContent>
                 <CardActions>
