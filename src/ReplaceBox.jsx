@@ -8,7 +8,6 @@ function ReplaceBox(props) {
   const [replaceValue, setReplaceValue] = useState(props.config.replace);
 
   function handleNewFindRegExp(event) {
-    console.log(event, event.target.value);
     setFindRegExp(event.target.value)
   }
 

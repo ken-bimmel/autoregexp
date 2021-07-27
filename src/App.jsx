@@ -21,13 +21,10 @@ function App() {
 
   function handlePaste(event) {
     let rawText = (event.clipboardData || window.clipboardData).getData('text');
-    console.log(replacements);
     for (let replacement of replacements) {
       const regExp = new RegExp(replacement.find, 'g');
       rawText = rawText.replaceAll(regExp, replacement.replace)
-      console.log("replacing", regExp, replacement.replace, rawText)
     }
-    console.log("Final text", rawText)
     setReplacedText(rawText);
     navigator.clipboard.writeText(rawText).then(openClipSuccessSnack, openClipFailureSnack)
   }
