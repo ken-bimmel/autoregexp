@@ -48,6 +48,9 @@ function App() {
     }
   )
 
+  // [{"find":"(\\*\\*Melee\\*\\*)","replace":"$1\n"}]
+  // [{"find":"(\\*\\*Melee\\*\\*)","replace":"$1\n"},{"find":"(\\*\\*Melee\\*\\*)","replace":"$1\n"}]
+
   function handlePaste(event) {
     let rawText = (event.clipboardData || window.clipboardData).getData('text');
     if (htmlToMarkdown) {
@@ -177,9 +180,8 @@ function App() {
                     fullWidth
                     placeholder="Put config JSON here."
                     value={importedReplacements}
-                    onChange={(event) => {
-                      console.log("imported replacements: ", event.target.value); setImportedReplacements(event.target.value)
-                    }}
+                    onChange={(event) => setImportedReplacements(event.target.value)
+                    }
                   />
                 </CardContent>
                 <CardActions>
