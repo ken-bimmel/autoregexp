@@ -4,7 +4,14 @@ import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import ReplaceBox from './ReplaceBox';
-import { Button, Card, CardActions, CardContent, FormControlLabel, Switch } from '@material-ui/core';
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  FormControlLabel,
+  Switch
+} from '@material-ui/core';
 import TurndownService from 'turndown';
 
 function Alert(props) {
@@ -20,7 +27,14 @@ function App() {
 
   const [htmlToMarkdown, setHtmlToMarkdown] = useState(false);
 
-  const turndownService = new TurndownService({ headingStyle: "atx", hr: "---", bulletListMarker: "-", codeBlockStyle: "fenced" })
+  const turndownService = new TurndownService(
+    {
+      headingStyle: "atx",
+      hr: "---",
+      bulletListMarker: "-",
+      codeBlockStyle: "fenced"
+    }
+  )
 
 
 
@@ -98,16 +112,18 @@ function App() {
           >
             <Grid item>
               <Card>
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={htmlToMarkdown}
-                      onChange={(event) => setHtmlToMarkdown(event.target.checked)}
-                      color="primary"
-                    />
-                  }
-                  label="Convert HTML To Markdown on Paste (before replacement)"
-                />
+                <CardContent>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={htmlToMarkdown}
+                        onChange={(event) => setHtmlToMarkdown(event.target.checked)}
+                        color="primary"
+                      />
+                    }
+                    label="Convert HTML To Markdown on Paste (before replacement)"
+                  />
+                </CardContent>
               </Card>
             </Grid>
             <Grid item>
